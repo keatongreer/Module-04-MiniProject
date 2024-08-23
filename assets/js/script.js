@@ -17,10 +17,13 @@ let currentElement = null;
 
 clearBtn.addEventListener('click', function () {
   // TODO: Clear the local storage and refresh the page
+    localStorage.clear();
+    location.reload();
 });
 
 function updateLocalStorage() {
   // TODO: Update the local storage with the tempStorageObject
+  localStorage.setItem('storage', tempStorageObject);
 }
 
 // ? Function to load from local storage. This function will be called on page load.
@@ -49,8 +52,13 @@ addImageBtn.addEventListener('click', function () {
   const imageUrl = imageUrlInput.value;
   if (imageUrl) {
     // TODO: Create an image element, add a class of draggable, set the src attribute to the image URL provided by the user, and append it to the body element
+    let newImg = document.createElement('img');
+    newImg.setAttribute('class', 'draggable');
+    newImg.setAttribute('src', imageUrl);
+    moodBoardEl.append(newImg);
 
     // TODO: Set the `currentElement` to the image element you create.
+    currentElement = newImg;
 
     // ? We attach the mouse move event listener to the document and the mood board div so that the element can be dragged anywhere on the screen and dropped only on the mood board div.
     attachMouseListeners();
